@@ -9,6 +9,7 @@
 
 <body style="margin: 0px; overflow: hidden">
     <canvas id="myCanvas" style="background-color: chocolate;"></canvas>
+    <script src="track.js"></script>
     <script src="rectangle.js"></script>
     <script src="player.js"></script>
     <script>
@@ -18,41 +19,29 @@
         const ctx = myCanvas.getContext("2d")
 
         const m = 50
-        const l = 150
+        const l = 200
         const N = 10
         let x = 0
         let y = 0
 
         const rectangles = []
+
+        const track = new Track(x, y, N, m, l)
+
         const player = new Player(m / 2, m / 2, m * 0.2)
 
-        for (let i = 0; i < N; i++) {
-            if (i % 2 === 0) {
-                const [width, height] = [l, m]
-
-                rectangles.push(new Rectangle(x, y, width, height))
-                x += width
-            }
-            else {
-                const [width, height] = [m, l]
-
-                rectangles.push(new Rectangle(x, y, width, height))
-                y += height
-            }
-        }
+        myCanvas.addEventListener("pointerdown", () => player.changeDirection())
 
         animate()
 
         function animate() {
             player.move()
 
-            let isOnTrack = false
-            isOnTrack = rectangles.some(rectangle => rectangle.contains(player))
-            console.log(isOnTrack)
+            if (!track.contains(player)) return
 
             ctx.clearRect(0, 0, myCanvas.width, myCanvas.height)
 
-            rectangles.forEach(rectangle => rectangle.draw(ctx))
+            track.draw(ctx)
             player.draw(ctx)
 
             requestAnimationFrame(animate)

@@ -1,0 +1,36 @@
+class Track {
+    constructor(left, top, num, m, l) {
+        this.left = left
+        this.top = top
+        this.m = m
+        this.l = l
+
+        this.rectangles = []
+        this.index = 0
+        while (this.index < num) {
+            this.addRectangle()
+            this.index++
+        }
+    }
+    addRectangle() {
+        if (this.index % 2 === 0) {
+            const [width, height] = [this.l, this.m]
+
+            this.rectangles.push(new Rectangle(this.left, this.top, width, height))
+            this.left += width - this.m
+        }
+        else {
+            const [width, height] = [this.m, this.l]
+
+            this.rectangles.push(new Rectangle(this.left, this.top, width, height))
+            this.top += height - this.m
+        }
+    }
+    contains(player) {
+        return this.rectangles.some(rectangle => rectangle.contains(player))
+    }
+
+    draw(ctx) {
+        this.rectangles.forEach(rectangle => rectangle.draw(ctx))
+    }
+}
