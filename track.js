@@ -33,4 +33,18 @@ class Track {
     draw(ctx) {
         this.rectangles.forEach(rectangle => rectangle.draw(ctx))
     }
+
+    dequeueRectangle() {
+        this.rectangles.shift()
+    }
+    adjustFor(player) {
+        this.rectangles.forEach((rectangle, i) => {
+            if (rectangle.contains(player)) {
+                if (i > this.rectangles.length / 2) {
+                    this.dequeueRectangle()
+                    this.addRectangle()
+                }
+            }
+        })
+    }
 }
