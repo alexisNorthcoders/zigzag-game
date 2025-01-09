@@ -8,11 +8,14 @@ class Track {
         this.rectangles = []
         this.index = 0
         while (this.index < num) {
-            this.addRectangle()
-            this.index++
+            this.queueRectangle()
         }
     }
-    addRectangle() {
+    queueRectangle() {
+        if (this.index > 12) {
+            this.l = 200
+            this.m = 50
+        }
         if (this.index % 2 === 0) {
             const [width, height] = [this.l, this.m]
 
@@ -25,6 +28,7 @@ class Track {
             this.rectangles.push(new Rectangle(this.left, this.top, width, height))
             this.top += height - this.m
         }
+        this.index++
     }
     contains(player) {
         return this.rectangles.some(rectangle => rectangle.contains(player))
@@ -38,13 +42,15 @@ class Track {
         this.rectangles.shift()
     }
     adjustFor(player) {
-        this.rectangles.forEach((rectangle, i) => {
-            if (rectangle.contains(player)) {
+        for (let i = 0; i < this.rectangles.length; i++) {
+            const rect = this.rectangles[i]
+            if (rect.contains(player)) {
                 if (i > this.rectangles.length / 2) {
                     this.dequeueRectangle()
-                    this.addRectangle()
+                    this.queueRectangle()
+                    break
                 }
             }
-        })
+        }
     }
 }
