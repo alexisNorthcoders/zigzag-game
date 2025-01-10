@@ -5,14 +5,52 @@ class Player {
         this.radius = radius
         this.direction = "right"
         this.speed = speed
+        this.trail = [];
     }
     draw(ctx) {
+
+        this.trail.forEach((point, index) => {
+            const alpha = (index + 1) / this.trail.length;
+            ctx.beginPath();
+            ctx.arc(point.x, point.y, this.radius , 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(100, 100, 100, ${alpha})`;
+            ctx.fill();
+        });
+
         ctx.beginPath()
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2)
-        ctx.fillStyle = "yellow"
+        ctx.fillStyle = "black"
         ctx.fill()
+
+         const eyeOffset = this.radius / 2;
+         const eyeSize = this.radius / 5;
+ 
+         ctx.fillStyle = "yellow";
+         if (this.direction === "right") {
+
+             ctx.beginPath();
+             ctx.arc(this.x + eyeOffset, this.y - eyeOffset / 2, eyeSize, 0, Math.PI * 2);
+             ctx.fill();
+             ctx.beginPath();
+             ctx.arc(this.x + eyeOffset, this.y + eyeOffset / 2, eyeSize, 0, Math.PI * 2);
+             ctx.fill();
+         } else if (this.direction === "down") {
+
+             ctx.beginPath();
+             ctx.arc(this.x - eyeOffset / 2, this.y + eyeOffset, eyeSize, 0, Math.PI * 2);
+             ctx.fill();
+             ctx.beginPath();
+             ctx.arc(this.x + eyeOffset / 2, this.y + eyeOffset, eyeSize, 0, Math.PI * 2);
+             ctx.fill();
+         }
     }
     move(){
+
+        this.trail.push({ x: this.x, y: this.y });
+        if (this.trail.length > this.speed) {
+            this.trail.shift();
+        }
+
         switch(this.direction){
             case "right":
                 this.x += this.speed

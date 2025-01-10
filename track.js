@@ -12,10 +12,7 @@ class Track {
         }
     }
     queueRectangle() {
-        if (this.index > 12) {
-            this.l = 200
-            this.m = 50
-        }
+     
         if (this.index % 2 === 0) {
             const [width, height] = [this.l, this.m]
 
