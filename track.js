@@ -42,6 +42,7 @@ class Track {
         for (let i = 0; i < this.rectangles.length; i++) {
             const rect = this.rectangles[i]
             if (rect.contains(player)) {
+                rect.changeSpeed(player)
                 if (i > this.rectangles.length / 2) {
                     this.dequeueRectangle()
                     this.queueRectangle()

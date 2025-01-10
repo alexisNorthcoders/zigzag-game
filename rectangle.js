@@ -8,7 +8,7 @@ class Rectangle {
     }
 
     draw(ctx) {
-        
+
         ctx.fillStyle = this.colour
         ctx.fillRect(this.x, this.y, this.width, this.height)
     }
@@ -21,5 +21,23 @@ class Rectangle {
             player.x <= right &&
             player.y >= top &&
             player.y <= bottom)
+    }
+    changeSpeed(player) {
+        const largestSide = Math.max(this.height, this.width)
+
+        switch (largestSide) {
+            case 450:
+                player.speed = 7
+                break
+            case 550:
+                player.speed = 10
+                break
+            case 600:
+                player.speed = 4
+                break
+            default:
+                player.speed = 5
+                break
+        }
     }
 }

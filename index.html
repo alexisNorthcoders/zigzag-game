@@ -30,7 +30,7 @@
 
         const track = new Track(x, y, N, m, l)
 
-        const player = new Player(m / 2, m / 2, m * 0.2, speed)
+        const player = new Player(m / 2, m / 2, m * 0.15, speed)
 
         myCanvas.addEventListener("pointerdown", () => player.changeDirection())
 
@@ -39,26 +39,23 @@
         function animate() {
 
             count++
-            if (count === 600) {
+            if (count % 600 === 0) {
                 track.l = 450
                 track.m = 70
-                player.speed = 7
             }
-            if (count === 1200) {
+            if (count % 1200 === 0) {
                 track.l = 550
                 track.m = 70
-                player.speed = 10
             }
-            if (count === 1800) {
+            if (count % 1800 === 0) {
                 track.l = 600
                 track.m = 50
-                player.speed = 5
             }
 
             player.move()
             track.adjustFor(player)
 
-            //   if (!track.contains(player)) return
+            if (!track.contains(player)) return
 
             ctx.clearRect(0, 0, myCanvas.width, myCanvas.height)
 
