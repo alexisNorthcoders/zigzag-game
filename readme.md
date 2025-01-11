@@ -2,6 +2,8 @@
 
 This is a simple Zig Zag game implemented in HTML (canvas) and JavaScript.
 
+![alt text](image.png)
+
 ## Description
 
 This project is a submission for Radu Mariescu-Istodor's video. The game involves controlling a player that moves along a zigzag path. The player can change direction by clicking/touching or pressing the spacebar. The objective is to stay on the path and score as many points as possible.
@@ -20,3 +22,6 @@ This project is a submission for Radu Mariescu-Istodor's video. The game involve
 - sound effects
 
 Enjoy the game!
+
+Game hosted on https://alexisraspberry.duckdns.org/zigzag/
+
