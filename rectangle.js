@@ -8,7 +8,10 @@ class Rectangle {
     }
 
     draw(ctx) {
-
+        ctx.beginPath()
+        ctx.rect(this.x, this.y, this.width, this.height)
+        ctx.strokeStyle = "black"
+        ctx.stroke()
         ctx.fillStyle = this.colour
         ctx.fillRect(this.x, this.y, this.width, this.height)
     }
