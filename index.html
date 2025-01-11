@@ -17,6 +17,7 @@
     <script src="track.js"></script>
     <script src="rectangle.js"></script>
     <script src="player.js"></script>
+    <script src="reward.js"></script>
     <script>
         myCanvas.width = window.innerWidth
         myCanvas.height = window.innerHeight
@@ -37,9 +38,14 @@
 
         const track = new Track(x, y, N, m, l)
 
-        const player = new Player(m/2, m/2, playerSize, speed)
+        const player = new Player(m / 2, m / 2, playerSize, speed)
 
         myCanvas.addEventListener("pointerdown", () => player.changeDirection())
+        document.addEventListener("keydown", (event) => {
+            if (event.code === "Space") {
+                player.changeDirection()
+            }
+        })
 
         animate()
 
