@@ -32,9 +32,9 @@ class Rectangle {
         const top = this.y + player.radius
         const bottom = this.y + this.height - player.radius
         return (player.x >= left &&
-            player.x <= right &&
+            player.x <= right + 5 &&
             player.y >= top &&
-            player.y <= bottom)
+            player.y <= bottom + 5)
     }
     changeSpeed(player) {
         const largestSide = Math.max(this.height, this.width)
