@@ -15,9 +15,9 @@ This project is a submission for Radu Mariescu-Istodor's video. The game involve
 3. Click the "Start Game" button to begin playing.
 
 ## Things that can be improved:
+- adjust speed to be equal in all devices (mobile, desktop)
 - different rewards types
 - better alignment when changing for different widths and heights
-- score saving functionality
 - sound effects
 
 Enjoy the game!
