@@ -12,18 +12,22 @@
     <canvas id="myCanvas" style="background-color: black;"></canvas>
 
     <div id="scoreboard" style="position: absolute; top: 10px; left: 50%; transform: translateX(-50%); color: white; font-size: 24px; background-color: black; padding: 5px; border: 2px solid white; border-radius: 5px; user-select: none;">
-        Score: <span id="score">0</span>
+        Score: <span id="score">0</span> Highscore: <span id="highscore">0</span>
     </div>
     <div id="startScreen" style="position: absolute; top: 0; left: 0; width: 100%; height: 90%; background-color: rgba(0, 0, 0, 0.8); display: flex; justify-content: center; align-items: center; color: white; font-size: 24px;">
         <button id="startButton" style="padding: 10px 20px; font-size: 24px; cursor: pointer;">Start Game</button>
+
     </div>
     <div id="gameOverScreen" style="position: absolute; top: 0; left: 0; width: 100%; height: 90%; display: none; justify-content: center; align-items: center; color: rgb(255, 0, 0); font-size: 30px; font-weight: bold; text-shadow: 0 0 5px black, 0 0 5px black">
         GAME OVER
+    </div>
+    <div id="highscoreScreen" style="position: absolute; top: 0; left: 0; width: 100%; height: 50%; background-color: rgba(0, 0, 0, 0.8); display: none; justify-content: center; align-items: center; color: white; font-size: 24px;">
     </div>
     <script src="track.js"></script>
     <script src="rectangle.js"></script>
     <script src="player.js"></script>
     <script src="reward.js"></script>
+    <script src="main.js"></script>
     <script>
 
         myCanvas.addEventListener("pointerdown", () => player.changeDirection())
@@ -37,6 +41,11 @@
             startScreen.style.display = "none";
             animate();
         });
+
+        getHighscore().then(response => {
+
+            document.getElementById("highscore").innerText = response.score
+        })
 
 
         myCanvas.width = window.innerWidth
@@ -122,9 +131,11 @@
 
             if (!track.contains(player)) {
                 gameOverScreen.style.display = "flex";
+                player.gameover()
                 setTimeout(() => {
                     showStartScreen();
                 }, 2000);
+
                 return;
             }
 

@@ -64,4 +64,7 @@ class Player {
     changeDirection(){
         this.direction = this.direction === "right" ? "down" : "right"
     }
+    async gameover(){
+        await postScore(this.score)
+    }
 }
