@@ -29,6 +29,12 @@ class Track {
         this.index++
     }
     contains(player) {
+        this.rectangles.forEach(rectangle => rectangle.rewards.forEach(reward => {
+            if (reward.contains(player)) {
+                player.score += reward.points
+                rectangle.rewards.splice(rectangle.rewards.indexOf(reward), 1)
+            }
+        }))
         return this.rectangles.some(rectangle => rectangle.contains(player))
     }
 

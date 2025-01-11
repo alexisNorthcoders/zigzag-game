@@ -6,6 +6,7 @@ class Player {
         this.direction = "right"
         this.speed = speed
         this.trail = [];
+        this.score = 0
     }
     draw(ctx) {
 
