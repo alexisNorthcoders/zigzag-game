@@ -14,11 +14,28 @@
     <div id="scoreboard" style="position: absolute; top: 10px; left: 50%; transform: translateX(-50%); color: white; font-size: 24px; background-color: black; padding: 5px; border: 2px solid white; border-radius: 5px; user-select: none;">
         Score: <span id="score">0</span>
     </div>
+    <div id="startScreen" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); display: flex; justify-content: center; align-items: center; color: white; font-size: 24px;">
+        <button id="startButton" style="padding: 10px 20px; font-size: 24px; cursor: pointer;">Start Game</button>
+    </div>
     <script src="track.js"></script>
     <script src="rectangle.js"></script>
     <script src="player.js"></script>
     <script src="reward.js"></script>
     <script>
+
+        myCanvas.addEventListener("pointerdown", () => player.changeDirection())
+        document.addEventListener("keydown", (event) => {
+            if (event.code === "Space") {
+                player.changeDirection()
+            }
+        })
+
+        startButton.addEventListener("click", () => {
+            startScreen.style.display = "none";
+            animate();
+        });
+
+
         myCanvas.width = window.innerWidth
         myCanvas.height = window.innerHeight
 
@@ -28,7 +45,7 @@
         const l = 300
         const N = 10
         const playerSize = 15
-        const speed = 5
+        const speed = 3
         let x = 0
         let y = 0
         let count = 0
@@ -40,56 +57,56 @@
 
         const player = new Player(m / 2, m / 2, playerSize, speed)
 
-        myCanvas.addEventListener("pointerdown", () => player.changeDirection())
-        document.addEventListener("keydown", (event) => {
-            if (event.code === "Space") {
-                player.changeDirection()
-            }
-        })
-
-        animate()
+        function showStartScreen() {
+            startScreen.style.display = "flex";
+            startButton.innerText = "Restart Game";
+            startButton.addEventListener("click", () => {
+                location.reload();
+            });
+        }
 
         function animate() {
-
-            count++
+            count++;
             if (count % 600 === 0) {
-                track.l = 450
-                track.m = 70
+                track.l = 450;
+                track.m = 70;
             }
             if (count % 1200 === 0) {
-                track.l = 550
-                track.m = 70
+                track.l = 550;
+                track.m = 70;
             }
             if (count % 1800 === 0) {
-                track.l = 600
-                track.m = 50
+                track.l = 600;
+                track.m = 50;
             }
 
-            player.move()
-            track.adjustFor(player)
+            player.move();
+            track.adjustFor(player);
 
-            if (!track.contains(player)) return
+            if (!track.contains(player)) {
+                showStartScreen();
+                return;
+            }
 
-            ctx.clearRect(0, 0, myCanvas.width, myCanvas.height)
+            ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
 
-            ctx.save()
-            ctx.translate(myCanvas.width / 2, myCanvas.height / 2)
-            ctx.rotate(-3 * Math.PI / 4)
-            ctx.translate(-player.x, -player.y)
+            ctx.save();
+            ctx.translate(myCanvas.width / 2, myCanvas.height / 2);
+            ctx.rotate(-3 * Math.PI / 4);
+            ctx.translate(-player.x, -player.y);
 
+            track.draw(ctx);
+            player.draw(ctx);
 
-            track.draw(ctx)
-            player.draw(ctx)
+            updateScore();
 
-            updateScore()
+            ctx.restore();
 
-            ctx.restore()
-
-            requestAnimationFrame(animate)
+            requestAnimationFrame(animate);
         }
         function updateScore() {
             player.score++
-            document.getElementById("score").innerText =  player.score
+            document.getElementById("score").innerText = player.score
         }
 
     </script>
@@ -97,3 +114,6 @@
 </body>
 
 </html>
+<script>
+
+</script>
