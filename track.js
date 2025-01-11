@@ -12,17 +12,20 @@ class Track {
             this.queueRectangle()
         }
     }
-    spawnReward(x,y) {
+    spawnReward(x, y) {
         this.rewards.push(new Reward(x, y))
     }
     queueRectangle() {
-     
+
         if (this.index % 2 === 0) {
             const [width, height] = [this.l, this.m]
 
             this.rectangles.push(new Rectangle(this.left, this.top, width, height))
             this.left += width - this.m
-            this.spawnReward( this.left - this.l/2 , this.top + height/2)
+
+            const randomX = this.left - 2 * height + Math.random() * (2 * height)
+            const randomY = this.top + Math.random() * height
+            this.spawnReward(randomX, randomY)
         }
         else {
             const [width, height] = [this.m, this.l]
@@ -63,7 +66,7 @@ class Reward {
     constructor(x, y) {
         this.x = x
         this.y = y
-        this.radius = 10
+        this.radius = 7
     }
     draw(ctx) {
         ctx.fillStyle = "green"
