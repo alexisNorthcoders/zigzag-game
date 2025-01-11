@@ -8,7 +8,12 @@
 </head>
 
 <body style="margin: 0px; overflow: hidden">
+
     <canvas id="myCanvas" style="background-color: black;"></canvas>
+
+    <div id="scoreboard" style="position: absolute; top: 10px; left: 50%; transform: translateX(-50%); color: white; font-size: 24px; background-color: black; padding: 5px; border: 2px solid white; border-radius: 5px; user-select: none;">
+        Score: <span id="score">0</span>
+    </div>
     <script src="track.js"></script>
     <script src="rectangle.js"></script>
     <script src="player.js"></script>
@@ -25,6 +30,7 @@
         let x = 0
         let y = 0
         let count = 0
+        let score = 0
 
         const rectangles = []
 
@@ -68,11 +74,16 @@
             track.draw(ctx)
             player.draw(ctx)
 
+            updateScore()
+
             ctx.restore()
 
             requestAnimationFrame(animate)
         }
-
+        function updateScore() {
+            score++
+            document.getElementById("score").innerText = score
+        }
 
     </script>
 
