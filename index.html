@@ -97,6 +97,9 @@
 
             // change color based on score thresholds
             switch (true) {
+                case (player.score > 50000):
+                    myCanvas.style.backgroundColor = "#6D1CFB";
+                    break;
                 case (player.score > 25000):
                     myCanvas.style.backgroundColor = "#ADD8E6";
                     break;
