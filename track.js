@@ -6,14 +6,11 @@ class Track {
         this.l = l
 
         this.rectangles = []
-        this.rewards = []
+
         this.index = 0
         while (this.index < num) {
             this.queueRectangle()
         }
-    }
-    spawnReward(x, y) {
-        this.rewards.push(new Reward(x, y))
     }
     queueRectangle() {
 
@@ -22,10 +19,6 @@ class Track {
 
             this.rectangles.push(new Rectangle(this.left, this.top, width, height))
             this.left += width - this.m
-
-            const randomX = this.left - 2 * height + Math.random() * (2 * height)
-            const randomY = this.top + Math.random() * height
-            this.spawnReward(randomX, randomY)
         }
         else {
             const [width, height] = [this.m, this.l]
@@ -41,7 +34,7 @@ class Track {
 
     draw(ctx) {
         this.rectangles.forEach(rectangle => rectangle.draw(ctx))
-        this.rewards.forEach(reward => reward.draw(ctx))
+        this.rectangles.forEach(rectangle => rectangle.rewards.forEach(reward => reward.draw(ctx)))
     }
 
     dequeueRectangle() {

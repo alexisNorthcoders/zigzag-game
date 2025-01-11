@@ -5,13 +5,24 @@ class Rectangle {
         this.width = width
         this.height = height
         this.colour = colour
+        this.rewards = []
+        this.spawnReward()
+    }
+
+    spawnReward() {
+        const randomX = this.x + Math.random() * this.width
+        const randomY = this.y + Math.random() * this.height
+        this.rewards.push(new Reward(randomX, randomY))
+
     }
 
     draw(ctx) {
-        ctx.beginPath()
-        ctx.rect(this.x, this.y, this.width, this.height)
-        ctx.strokeStyle = "black"
-        ctx.stroke()
+
+        // Draw the rectangle for debugging
+        /*  ctx.beginPath()
+         ctx.rect(this.x, this.y, this.width, this.height)
+         ctx.strokeStyle = "black"
+         ctx.stroke() */
         ctx.fillStyle = this.colour
         ctx.fillRect(this.x, this.y, this.width, this.height)
     }
