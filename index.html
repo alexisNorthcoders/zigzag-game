@@ -14,10 +14,10 @@
     <div id="scoreboard" style="position: absolute; top: 10px; left: 50%; transform: translateX(-50%); color: white; font-size: 24px; background-color: black; padding: 5px; border: 2px solid white; border-radius: 5px; user-select: none;">
         Score: <span id="score">0</span>
     </div>
-    <div id="startScreen" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); display: flex; justify-content: center; align-items: center; color: white; font-size: 24px;">
+    <div id="startScreen" style="position: absolute; top: 0; left: 0; width: 100%; height: 90%; background-color: rgba(0, 0, 0, 0.8); display: flex; justify-content: center; align-items: center; color: white; font-size: 24px;">
         <button id="startButton" style="padding: 10px 20px; font-size: 24px; cursor: pointer;">Start Game</button>
     </div>
-    <div id="gameOverScreen" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(255, 0, 0, 0.1); display: none; justify-content: center; align-items: center; color: rgb(255, 0, 0); font-size: 30px; font-weight: bold; text-shadow: 0 0 5px black, 0 0 5px black">
+    <div id="gameOverScreen" style="position: absolute; top: 0; left: 0; width: 100%; height: 90%; display: none; justify-content: center; align-items: center; color: rgb(255, 0, 0); font-size: 30px; font-weight: bold; text-shadow: 0 0 5px black, 0 0 5px black">
         GAME OVER
     </div>
     <script src="track.js"></script>
@@ -46,7 +46,7 @@
 
         const m = 100
         const l = 300
-        const N = 10
+        const N = 15
         const playerSize = 15
         const speed = 3
         let x = 0
@@ -63,6 +63,7 @@
         function showStartScreen() {
             gameOverScreen.style.display = "none";
             startScreen.style.display = "flex";
+            startScreen.style.backgroundColor = "";
             startButton.innerText = "Restart Game";
             startButton.addEventListener("click", () => {
                 location.reload();
@@ -71,17 +72,46 @@
 
         function animate() {
             count++;
+
+            // change rectangles sizes every 600 frames
+            const sizes = [
+                { l: 150, m: 100 },
+                { l: 450, m: 70 },
+                { l: 550, m: 70 },
+                { l: 600, m: 50 },
+                { l: 300, m: 70 }
+            ];
+
+            let availableSizes = [...sizes];
+
             if (count % 600 === 0) {
-                track.l = 450;
-                track.m = 70;
+                if (availableSizes.length === 0) {
+                    availableSizes = [...sizes];
+                }
+
+                const newSizesIndex = Math.floor(Math.random() * availableSizes.length);
+                const rectangle = availableSizes.splice(newSizesIndex, 1)[0];
+                track.l = rectangle.l;
+                track.m = rectangle.m;
             }
-            if (count % 1200 === 0) {
-                track.l = 550;
-                track.m = 70;
-            }
-            if (count % 1800 === 0) {
-                track.l = 600;
-                track.m = 50;
+
+            // change color based on score thresholds
+            switch (true) {
+                case (player.score > 25000):
+                    myCanvas.style.backgroundColor = "#ADD8E6";
+                    break;
+                case (player.score > 20000):
+                    myCanvas.style.backgroundColor = "#E5E4E2";
+                    break;
+                case (player.score > 15000):
+                    myCanvas.style.backgroundColor = "#FFD700";
+                    break;
+                case (player.score > 10000):
+                    myCanvas.style.backgroundColor = "#C0C0C0";
+                    break;
+                case (player.score > 5000):
+                    myCanvas.style.backgroundColor = "#CD7F32";
+                    break;
             }
 
             player.move();
