@@ -1,6 +1,6 @@
 async function getHighscore() {
     try {
-        const response = await fetch(`/snake/score`);
+        const response = await fetch(`/zigzag/score`);
         if (!response.ok) {
             throw new Error(`Error fetching score: ${response.statusText}`);
         }
