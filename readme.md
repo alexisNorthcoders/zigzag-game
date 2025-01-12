@@ -2,6 +2,10 @@
 
 This is a simple Zig Zag game implemented in HTML (canvas) and JavaScript.
 
+# Live host
+
+Game hosted on https://alexisraspberry.duckdns.org/zigzag/
+
 ![alt text](image.png)
 
 ## Description
@@ -21,6 +25,4 @@ This project is a submission for Radu Mariescu-Istodor's video. The game involve
 - sound effects
 
 Enjoy the game!
-
-Game hosted on https://alexisraspberry.duckdns.org/zigzag/
 
