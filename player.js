@@ -48,7 +48,7 @@ class Player {
     move(){
 
         this.trail.push({ x: this.x, y: this.y });
-        if (this.trail.length > this.speed) {
+        if (this.trail.length > 3 * this.speed) {
             this.trail.shift();
         }
 
