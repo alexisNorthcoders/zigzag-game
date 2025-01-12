@@ -11,6 +11,13 @@ class Track {
         while (this.index < num) {
             this.queueRectangle()
         }
+        this.restartObj = {
+            left,
+            top,
+            num,
+            m,
+            l
+        }
     }
     queueRectangle() {
 
@@ -57,6 +64,18 @@ class Track {
                     break
                 }
             }
+        }
+    }
+    reset() {
+        const { left, top, num, m, l } = this.restartObj
+        this.left = left
+        this.top = top
+        this.m = m
+        this.l = l
+        this.index = 0
+        this.rectangles = []
+        while (this.index < num) {
+            this.queueRectangle()
         }
     }
 }

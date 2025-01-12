@@ -62,6 +62,8 @@
         let count = 0
         let score = 0
 
+        let gameOver = false
+
         const rectangles = []
 
         const track = new Track(x, y, N, m, l)
@@ -74,7 +76,7 @@
             startScreen.style.backgroundColor = "";
             startButton.innerText = "Restart Game";
             startButton.addEventListener("click", () => {
-                location.reload();
+                resetGame()
             });
         }
 
@@ -128,12 +130,14 @@
             player.move();
             track.adjustFor(player);
 
-            if (!track.contains(player)) {
+            if (!gameOver && !track.contains(player)) {
+                gameOver = true
+                player.gameover()
+
                 setTimeout(() => {
                     showStartScreen();
                 }, 2000);
                 gameOverScreen.style.display = "flex";
-                player.gameover()
                 return;
             }
 
@@ -156,6 +160,14 @@
         function updateScore() {
             player.score++
             document.getElementById("score").innerText = player.score
+        }
+
+        function resetGame() {
+            gameOver = false
+            track.reset()
+            player.reset()
+            myCanvas.style.backgroundColor = "black";
+
         }
 
     </script>
