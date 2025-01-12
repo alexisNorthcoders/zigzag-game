@@ -41,16 +41,16 @@ class Rectangle {
 
         switch (largestSide) {
             case 450:
-                player.speed = 3
+                player.speed = 1.5 * speed
                 break
             case 550:
-                player.speed = 4
+                player.speed = 2 * speed
                 break
             case 600:
-                player.speed = 5
+                player.speed = 1.3 * speed
                 break
             default:
-                player.speed = 2
+                player.speed = speed
                 break
         }
     }
