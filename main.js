@@ -5,7 +5,7 @@ async function getHighscore() {
             throw new Error(`Error fetching score: ${response.statusText}`);
         }
         const score = await response.json();
-        console.log("Highscore:", score);
+        console.log("Highscores:", score);
         return score;
     } catch (error) {
         console.error("Error retrieving user score:", error);

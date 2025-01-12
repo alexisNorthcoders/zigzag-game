@@ -44,9 +44,8 @@
 
         getHighscore().then(response => {
 
-            document.getElementById("highscore").innerText = response.score
+            document.getElementById("highscore").innerText = response.at(-1).score
         })
-
 
         myCanvas.width = window.innerWidth
         myCanvas.height = window.innerHeight
@@ -130,12 +129,11 @@
             track.adjustFor(player);
 
             if (!track.contains(player)) {
-                gameOverScreen.style.display = "flex";
-                player.gameover()
                 setTimeout(() => {
                     showStartScreen();
                 }, 2000);
-
+                gameOverScreen.style.display = "flex";
+                player.gameover()
                 return;
             }
 
