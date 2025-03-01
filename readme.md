@@ -8,6 +8,8 @@ Game hosted on https://alexisraspberry.duckdns.org/zigzag/
 
 ![alt text](image.png)
 
+![alt text](image-1.png)
+
 ## Description
 
 This project is a submission for Radu Mariescu-Istodor's video. The game involves controlling a player that moves along a zigzag path. The player can change direction by clicking/touching or pressing the spacebar. The objective is to stay on the path and score as many points as possible.
